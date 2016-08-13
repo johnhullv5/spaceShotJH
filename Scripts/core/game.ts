@@ -136,6 +136,11 @@ namespace core {
                 "enemy_bullet": { "frames": [7] },
                 "player": { "frames": [8] },
                 "startButton": { "frames": [9] }
+                /*"plane":{
+                    "frames":[4,6,8]
+                    "speed":0.5
+
+                }*/
             }
 
         };
