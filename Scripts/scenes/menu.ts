@@ -30,7 +30,7 @@ module scenes {
             this.addChild(this._menuLabel);
 
             // add the start button
-            this._startButton = new objects.Button("startButton", 300 , 515, true)
+           this._startButton = new objects.Button("startButton", 300 , 515, true)
             this.addChild(this._startButton);
 
             // Start button event listener

@@ -29,6 +29,7 @@ module managers {
                     if (other.name === "diamond") {
                         createjs.Sound.play("diamond_sound");
                         core.score += 100;
+                        other.visible = false;
                     }
                     
                 }

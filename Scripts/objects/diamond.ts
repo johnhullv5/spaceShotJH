@@ -34,6 +34,7 @@ module objects {
          * @returns {void}
          */
         private _reset(): void {
+            this.visible = true;
             this._dx = Math.floor((Math.random() * 3) + 5); // horizontal drift
             console.log("dx:" + this._dx);
             this._dy = Math.floor((Math.random() * 5) + 2); // horizontal drift
