@@ -1,0 +1,33 @@
+{
+
+"images": [
+    "../../Assets/images/atlas.png"
+],
+
+"frames": [
+    [1, 1, 250, 188, 0, 0, 0],
+    [253, 1, 170, 136, 0, 0, 0],
+    [253, 139, 171, 85, 0, 0, 0],
+    [425, 1, 120, 108, 0, 0, 0],
+    [425, 111, 39, 11, 0, 0, 0],
+    [426, 124, 80, 49, 0, 0, 0],
+    [426, 175, 99, 38, 0, -12, -26],
+    [508, 111, 18, 17, 0, 0, 0],
+    [1, 191, 150, 49, 0, 0, 0],
+    [153, 191, 87, 38, 0, -15, -26]
+],
+
+"animations": {
+    "enemy3": { "frames": [0] },
+    "restartButton": { "frames": [1] },
+    "enemy2": { "frames": [2] },
+    "enemy1": { "frames": [3] },
+    "player_bullet": { "frames": [4] },
+    "diamond": { "frames": [5] },
+    "ruleButton": { "frames": [6] },
+    "enemy_bullet": { "frames": [7] },
+    "player": { "frames": [8] },
+    "startButton": { "frames": [9] }
+}
+
+}

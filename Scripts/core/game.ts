@@ -41,14 +41,14 @@ namespace core {
     let level3: scenes.Level3;
     export let toLevel2: number = 300;
     export let toLevel3: number = 600;
-    
+
     let rule: scenes.Rule;
 
 
     // asset manifest for images and sounds
     let assetData: objects.Asset[] = [
         { id: "ruleButton", src: "../../Assets/images/ruleButton.png" },
-         { id: "rules", src: "../../Assets/images/instruction.png" },
+        { id: "rules", src: "../../Assets/images/instruction.png" },
         { id: "startButton", src: "../../Assets/images/startButton.png" },
         { id: "restartButton", src: "../../Assets/images/restartButton.png" },
         { id: "space1", src: "../../Assets/images/space1.gif" },
@@ -64,9 +64,44 @@ namespace core {
         { id: "level1_bgsound", src: "../../Assets/audio/level1_bgsound.wav" },
         { id: "level2_bgsound", src: "../../Assets/audio/level2_bgsound.wav" },
         { id: "level3_bgsound", src: "../../Assets/audio/level3_bgsound.wav" }
-        
-        
+
+
     ];
+
+    let textureAtlas = {
+
+        "images": [
+            "../../Assets/images/atlas.png"
+        ],
+
+        "frames": [
+            [1, 1, 250, 188, 0, 0, 0],
+            [253, 1, 170, 136, 0, 0, 0],
+            [253, 139, 171, 85, 0, 0, 0],
+            [425, 1, 120, 108, 0, 0, 0],
+            [425, 111, 39, 11, 0, 0, 0],
+            [426, 124, 80, 49, 0, 0, 0],
+            [426, 175, 99, 38, 0, -12, -26],
+            [508, 111, 18, 17, 0, 0, 0],
+            [1, 191, 150, 49, 0, 0, 0],
+            [153, 191, 87, 38, 0, -15, -26]
+        ],
+
+        "animations": {
+            "enemy3": { "frames": [0] },
+            "restartButton": { "frames": [1] },
+            "enemy2": { "frames": [2] },
+            "enemy1": { "frames": [3] },
+            "player_bullet": { "frames": [4] },
+            "diamond": { "frames": [5] },
+            "ruleButton": { "frames": [6] },
+            "enemy_bullet": { "frames": [7] },
+            "player": { "frames": [8] },
+            "startButton": { "frames": [9] }
+        }
+
+    };
+
 
     /**
      * This method preloads assets for the game
@@ -94,6 +129,7 @@ namespace core {
         createjs.Ticker.framerate = 60;
         createjs.Ticker.on("tick", gameLoop); // create an event listener for the tick event
 
+        //
         // setup the default scene
         scene = config.Scene.MENU;
         changeScene();
@@ -137,7 +173,7 @@ namespace core {
             case config.Scene.RULE:
                 stage.removeAllChildren();
                 rule = new scenes.Rule();
-                
+
                 currentScene = rule;
                 break;
             // Show the LEVEL1 Scene
@@ -146,7 +182,7 @@ namespace core {
                 level1 = new scenes.Level1();
                 currentScene = level1;
                 break;
-             // Show the LEVEL2 Scene
+            // Show the LEVEL2 Scene
             case config.Scene.LEVEL2:
                 stage.removeAllChildren();
                 level2 = new scenes.Level2();
