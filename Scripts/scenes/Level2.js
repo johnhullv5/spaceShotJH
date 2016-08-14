@@ -48,9 +48,9 @@ var scenes;
                 this.addChild(this._bullets[bullet]);
             }
             //TEST TEST
-            this._bullets[0].Fire(this._player.position);
-            this._bullets[0].Fire(this._player.position);
-            console.log(this._player.position);
+            //this._bullets[0].Fire(this._player.position);
+            // this._bullets[0].Fire(this._player.position);
+            //console.log(this._player.position);
             //TEST ENDS
             // // enemy2 array
             this._enemy2 = new Array();
@@ -60,6 +60,7 @@ var scenes;
             }
             // include a collision managers
             this._collision = new managers.Collision();
+            this._keyboardControls = new objects.KeyboardControls();
             this._level2Label = new objects.Label("Level 2 ", "40px", "Consolas", "#FFFF00", 50, 5, false);
             this.addChild(this._level2Label);
             // add lives and score label
@@ -93,6 +94,9 @@ var scenes;
                     _this._collision.check(enemy2, bullet);
                 });
             });
+            if (this._keyboardControls.fire) {
+                this._bullets[0].Fire(this._player.position);
+            }
             this._updateScoreBoard();
             if (core.lives < 1) {
                 this._level2_bgsound.stop();

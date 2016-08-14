@@ -46,7 +46,7 @@ namespace core {
     let level2: scenes.Level2;
     let level3: scenes.Level3;
     export let toLevel2: number = 300;
-    export let toLevel3: number = 600;
+    export let toLevel3: number = 600000;
 
     let rule: scenes.Rule;
 

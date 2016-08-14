@@ -83,7 +83,7 @@ var objects;
         };
         player_bullet.prototype.start = function () {
             this._defaultPostion = new objects.Vector2(-1000, -1000);
-            this.Speed = 3;
+            this.Speed = 8;
             //this._defaultPostion = new Vector2(-1000, -1000);
             //this.InFlight = false;
             this.Reset();

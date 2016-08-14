@@ -11,6 +11,7 @@ module scenes {
         private _level2Label: objects.Label;
         private _level2_bgsound: createjs.AbstractSoundInstance;
         private _bullets: objects.player_bullet[];
+        private _keyboardControls:objects.KeyboardControls;
 
         /**
          * Creates an instance of Menu.
@@ -62,9 +63,9 @@ module scenes {
 
             }
             //TEST TEST
-            this._bullets[0].Fire(this._player.position);
-             this._bullets[0].Fire(this._player.position);
-            console.log(this._player.position);
+            //this._bullets[0].Fire(this._player.position);
+            // this._bullets[0].Fire(this._player.position);
+            //console.log(this._player.position);
             //TEST ENDS
 
             // // enemy2 array
@@ -76,6 +77,8 @@ module scenes {
 
             // include a collision managers
             this._collision = new managers.Collision();
+
+            this._keyboardControls = new objects.KeyboardControls();
 
             this._level2Label = new objects.Label("Level 2 ", "40px", "Consolas", "#FFFF00", 50, 5, false);
             this.addChild(this._level2Label);
@@ -119,6 +122,10 @@ module scenes {
                     this._collision.check(enemy2, bullet);
                 })
             });
+
+            if(this._keyboardControls.fire){
+                this._bullets[0].Fire(this._player.position);
+            }
 
             this._updateScoreBoard();
 
