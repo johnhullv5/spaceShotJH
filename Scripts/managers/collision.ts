@@ -30,12 +30,17 @@ module managers {
                         core.lives -= 1;
                     }
 
-                     if (other.name === "enemy3") {
+                    if (other.name === "enemy3") {
                         createjs.Sound.play("enemy1_sound");
                         core.lives -= 1;
                     }
 
                     if (other.name === "enemy2_bullet") {
+                        createjs.Sound.play("enemy1_sound");
+                        core.lives -= 1;
+                    }
+
+                    if (other.name === "enemy3_bullet") {
                         createjs.Sound.play("enemy1_sound");
                         core.lives -= 1;
                     }
@@ -53,6 +58,14 @@ module managers {
                         prime.Reset();
                         other.Reset();
                         core.score += 666;
+
+                    }
+
+                    if (other.name === "player_bullet_update") {
+                        createjs.Sound.play("diamond_sound");
+                        prime.Reset();
+                        other.Reset();
+                        core.score += 999;
 
                     }
 

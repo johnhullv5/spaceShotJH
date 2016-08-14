@@ -11,6 +11,13 @@ module scenes {
         private _level3Label: objects.Label;
         private _level3_bgsound: createjs.AbstractSoundInstance;
 
+        //level3
+        private _bullets: objects.player_bullet_update[];
+        private _enemyBullets: objects.enemy3_bullet[];
+        private _keyboardControls: objects.KeyboardControls;
+
+        private _frameCount = 0;
+
         /**
          * Creates an instance of Menu.
          * 
@@ -19,10 +26,10 @@ module scenes {
             super();
         }
 
-        private _updateScoreBoard() {   
+        private _updateScoreBoard() {
             this._livesLabel.text = "Lives: " + core.lives;
             this._scoreLabel.text = "Score: " + core.score;
-      
+
         }
 
         /**
@@ -40,21 +47,41 @@ module scenes {
             // player object
             this._player = new objects.Player("player");
             this.addChild(this._player);
-           
 
-             // diamond array
+
+            // diamond array
             this._diamond = new Array<objects.Diamond>();
             for (let count = 0; count < 2; count++) {
                 this._diamond.push(new objects.Diamond("diamond"));
                 this.addChild(this._diamond[count]);
             }
-            
+
             // // enemy3 array
             this._enemy3 = new Array<objects.Enemy3>();
             for (let count = 0; count < 1; count++) {
                 this._enemy3.push(new objects.Enemy3("enemy3"));
                 this.addChild(this._enemy3[count]);
             }
+
+            //bullet array
+            this._bullets = new Array<objects.player_bullet_update>();
+            for (let bullet = 0; bullet < 10; bullet++) {
+                this._bullets.push(new objects.player_bullet("player_bullet_update"));
+                this.addChild(this._bullets[bullet]);
+
+
+            }
+
+            //bullet array
+            this._enemyBullets = new Array<objects.enemy3_bullet>();
+            for (let bullet = 0; bullet < 10; bullet++) {
+                this._enemyBullets.push(new objects.enemy3_bullet("enemy3_bullet"));
+                this.addChild(this._enemyBullets[bullet]);
+
+
+            }
+
+             this._keyboardControls = new objects.KeyboardControls();
 
             // include a collision managers
             this._collision = new managers.Collision();
@@ -69,25 +96,79 @@ module scenes {
             this._scoreLabel = new objects.Label("Score: " + core.score, "40px", "Consolas", "#1AFBF4", 600, 5, false);
             this.addChild(this._scoreLabel);
 
-            
+
             // add this scene to the global scene container
             core.stage.addChild(this);
         }
 
         public Update(): void {
+            this._frameCount++;
             this._space.update();
             this._player.update();
-           
-            this._diamond.forEach(diamond => {
-                 diamond.update();
-                 this._collision.check(this._player, diamond);
-             });
 
-             //update each enemy2
-            this._enemy3.forEach(enemy2 => {
-                enemy2.update();
-                this._collision.check(this._player, enemy2);
+            this._diamond.forEach(diamond => {
+                diamond.update();
+                this._collision.check(this._player, diamond);
             });
+
+            //update each enemy3
+            this._enemy3.forEach(enemy3 => {
+                enemy3.update();
+                this._collision.check(this._player, enemy3);
+            });
+
+             this._bullets.forEach(bullet => {
+                //update each bullet
+                bullet.update();
+
+            });
+
+            this._enemyBullets.forEach(bullet => {
+                //update each bullet
+                bullet.update();
+
+            });
+
+           //update each enemy2
+          //  this._enemy3.forEach(enemy3 => {
+            //    enemy3.update();
+           //     this._collision.check(this._player, enemy3);
+          //  });
+
+            //checks collisions between each enemy1 and each bullet
+            this._enemy3.forEach(enemy3 => {
+                this._bullets.forEach(bullet => {
+                    this._collision.check(enemy3, bullet);
+                })
+            });
+
+            //check if sapcebar is pushed .
+            if (this._frameCount % 10 == 0 && this._keyboardControls.fire) {
+                for (var bullet in this._bullets) {
+                    if (!this._bullets[bullet].InFlight) {
+                        this._bullets[bullet].Fire(this._player.position);
+                        break;
+                    }
+                }
+
+            }
+
+            //this._bullets[0].Fire(this._player.position);
+            if (this._frameCount % 57 == 0) {
+                this._enemy3.forEach(enemy3 => {
+                    for (var bullet = 0; bullet < this._enemyBullets.length; bullet++) {
+                        if (!this._enemyBullets[bullet].InFlight) {
+                            this._enemyBullets[bullet].Fire(enemy3.position);
+                            break;
+                        }
+                    }
+                })
+            }
+
+            this._enemyBullets.forEach(bullet => {
+                this._collision.check(this._player, bullet);
+            });
+
 
             this._updateScoreBoard();
 

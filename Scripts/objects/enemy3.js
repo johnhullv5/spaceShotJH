@@ -34,7 +34,7 @@ var objects;
          * @method _reset
          * @returns {void}
          */
-        Enemy3.prototype._reset = function () {
+        Enemy3.prototype.Reset = function () {
             // this._dy = Math.floor((Math.random() * 5) + 5); // vertical speed
             // this._dx = Math.floor((Math.random() * 4) - 2); // horizontal drift
             this._dx = Math.floor((Math.random() * 5) + 8); // vertical drispeedft
@@ -57,7 +57,7 @@ var objects;
          */
         Enemy3.prototype._checkBounds = function () {
             if (this.y >= (628 + (this.width * 0.5))) {
-                this._reset();
+                this.Reset();
             }
         };
         // PUBLIC METHODS +++++++++++++++++++++++++++++++++++++++++++++
@@ -70,7 +70,7 @@ var objects;
          * @returns {void}
          */
         Enemy3.prototype.start = function () {
-            this._reset();
+            this.Reset();
         };
         /**
          * This method updates the object's properties

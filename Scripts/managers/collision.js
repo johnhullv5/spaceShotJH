@@ -30,6 +30,10 @@ var managers;
                         createjs.Sound.play("enemy1_sound");
                         core.lives -= 1;
                     }
+                    if (other.name === "enemy3_bullet") {
+                        createjs.Sound.play("enemy1_sound");
+                        core.lives -= 1;
+                    }
                     // if prime collides with diamond
                     if (other.name === "diamond") {
                         createjs.Sound.play("diamond_sound");
@@ -42,6 +46,12 @@ var managers;
                         prime.Reset();
                         other.Reset();
                         core.score += 666;
+                    }
+                    if (other.name === "player_bullet_update") {
+                        createjs.Sound.play("diamond_sound");
+                        prime.Reset();
+                        other.Reset();
+                        core.score += 999;
                     }
                 }
             }
