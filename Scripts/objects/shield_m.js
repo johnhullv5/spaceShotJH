@@ -14,20 +14,28 @@ var objects;
      */
     var Shield = (function (_super) {
         __extends(Shield, _super);
-        // PRIVATE INSTANCE VARIABLES ++++++++++++++++++++++++++++
-        //static isActivate: boolean = false;
-        // PUBLIC PROPERTIES +++++++++++++++++++++++++++++++++++++++
-        // CONSTRUCTORS +++++++++++++++++++++++++++++++++++++++++++
-        /**
-         * Creates an instance of Island.
-         *
-         * @constructor
-         * @param {string} imageString
-         */
         function Shield(imageString) {
             _super.call(this, imageString);
             this.start();
         }
+        Object.defineProperty(Shield.prototype, "CurrentLives", {
+            get: function () {
+                return this._currentLives;
+            },
+            set: function (newLives) {
+                this._currentLives = newLives;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Shield.prototype.decreaseArmors = function (newLives, player) {
+            var lives = this._currentLives;
+            this.CurrentLives = newLives;
+            if (lives > this.CurrentLives) {
+                player.numOfArmors -= 1;
+                this.visible = false;
+            }
+        };
         /**
         * This method checks if the object has reached its boundaries
         *
@@ -68,6 +76,8 @@ var objects;
             this.y = 300;
             this.position.x = this.x;
             this.position.y = this.y;
+            this.CurrentLives = 5;
+            this.visible = false;
         };
         /**
          * This method updates the object's properties
@@ -79,6 +89,9 @@ var objects;
          */
         Shield.prototype.update = function () {
             // player to follow mouse
+        };
+        Shield.prototype.updateState = function (currentLives) {
+            this.CurrentLives = currentLives;
             this.position = new objects.Vector2(this.x, this.y);
             // if (objects.Player.isActivate) {
             //     this.y = core.stage.mouseY;

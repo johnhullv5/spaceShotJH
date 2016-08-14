@@ -13,7 +13,7 @@ var objects;
             switch (event.keyCode) {
                 case 38: /*up arrow*/
                 case 87:
-                    this.moveForward = true;
+                    this.armor = true;
                     break;
                 case 37: /*left arrow*/
                 case 65:
@@ -39,7 +39,7 @@ var objects;
             switch (event.keyCode) {
                 case 38: /*up arrow*/
                 case 87:
-                    this.moveForward = false;
+                    this.armor = false;
                     break;
                 case 37: /*left arrow*/
                 case 65:

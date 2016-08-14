@@ -10,7 +10,7 @@ module objects {
         // PRIVATE INSTANCE VARIABLES ++++++++++++++++++++++++++++
         //static isActivate: boolean = false;
         // PUBLIC PROPERTIES +++++++++++++++++++++++++++++++++++++++
-
+        public numOfArmors:number = 3;
         // CONSTRUCTORS +++++++++++++++++++++++++++++++++++++++++++
         /**
          * Creates an instance of Island.
@@ -23,6 +23,8 @@ module objects {
 
             this.start();
         }
+
+
 
         /**
         * This method checks if the object has reached its boundaries

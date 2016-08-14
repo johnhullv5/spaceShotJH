@@ -80,7 +80,7 @@ var scenes;
             this._frameCount++;
             this._space.update();
             this._player.update();
-            this._sheild.update();
+            this._sheild.updateState(core.lives);
             this._diamond.forEach(function (diamond) {
                 diamond.update();
                 _this._collision.check(_this._player, diamond);
@@ -113,6 +113,11 @@ var scenes;
                     }
                 }
             }
+            if (this._frameCount % 10 == 0 && this._keyboardControls.armor) {
+                if (this._player.numOfArmors > 0) {
+                    this._sheild.visible = true;
+                }
+            }
             //this._bullets[0].Fire(this._player.position);
             if (this._frameCount % 200 == 0) {
                 this._enemy3.forEach(function (enemy3) {
@@ -135,6 +140,7 @@ var scenes;
                 _this._collision.check(_this._player, bullet);
             });
             this._updateScoreBoard();
+            this._sheild.decreaseArmors(core.lives, this._player);
             if (core.lives < 1) {
                 this._level3_bgsound.stop();
                 core.scene = config.Scene.OVER;

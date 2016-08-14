@@ -3,7 +3,7 @@ module objects {
     // KeyboardControls Class +++++++++++++++
     export class KeyboardControls {
         // PUBLIC INSTANCE VARIABLES ++++++++++++
-        public moveForward: boolean;
+        public armor: boolean;
         public moveBackward: boolean;
         public moveLeft: boolean;
         public moveRight: boolean;
@@ -23,7 +23,7 @@ module objects {
             switch (event.keyCode) {
                 case 38: /*up arrow*/
                 case 87: /* W Key */
-                    this.moveForward = true;
+                    this.armor = true;
                     break;
                 case 37: /*left arrow*/
                 case 65: /* A Key */
@@ -50,7 +50,7 @@ module objects {
             switch (event.keyCode) {
                 case 38: /*up arrow*/
                 case 87: /* W Key */
-                    this.moveForward = false;
+                    this.armor = false;
                     break;
                 case 37: /*left arrow*/
                 case 65: /* A Key */

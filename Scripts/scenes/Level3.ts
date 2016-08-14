@@ -4,7 +4,7 @@ module scenes {
         private _space: objects.Space;
         private _diamond: objects.Diamond[];
         private _player: objects.Player;
-        private _sheild:objects.Shield;
+        private _sheild: objects.Shield;
         private _enemy3: objects.Enemy3[];
         private _explosions: objects.Explosion[];
         private _collision: managers.Collision;
@@ -51,7 +51,7 @@ module scenes {
             this.addChild(this._player);
 
             this._sheild = new objects.Shield("shield_m");
-             this.addChild(this._sheild);
+            this.addChild(this._sheild);
 
 
             // diamond array
@@ -117,7 +117,7 @@ module scenes {
             this._frameCount++;
             this._space.update();
             this._player.update();
-            this._sheild.update();
+            this._sheild.updateState(core.lives);
 
             this._diamond.forEach(diamond => {
                 diamond.update();
@@ -162,6 +162,14 @@ module scenes {
 
             }
 
+            if (this._frameCount % 10 == 0 && this._keyboardControls.armor) {
+                if(this._player.numOfArmors>0)
+                {
+                    this._sheild.visible = true;
+                }
+
+            }
+
             //this._bullets[0].Fire(this._player.position);
             if (this._frameCount % 200 == 0) {
                 this._enemy3.forEach(enemy3 => {
@@ -190,6 +198,8 @@ module scenes {
 
 
             this._updateScoreBoard();
+
+            this._sheild.decreaseArmors(core.lives,this._player);
 
             if (core.lives < 1) {
                 this._level3_bgsound.stop();

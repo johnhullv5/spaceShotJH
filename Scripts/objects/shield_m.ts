@@ -18,11 +18,40 @@ module objects {
          * @constructor
          * @param {string} imageString
          */
+
+        private _currentLives: number;
+        private _isValid:boolean;
+
         constructor(imageString: string) {
             super(imageString)
 
             this.start();
         }
+
+        get CurrentLives():number{
+            return this._currentLives;
+        }
+
+        set CurrentLives(newLives:number){
+          
+            this._currentLives = newLives;
+           
+        }
+
+        public decreaseArmors(newLives:number,player:objects.Player){
+              var lives = this._currentLives;
+              this.CurrentLives = newLives;
+               if(lives>this.CurrentLives){
+                   player.numOfArmors-=1;
+                   this.visible = false;
+
+               }
+               
+        }
+
+        
+
+
 
         /**
         * This method checks if the object has reached its boundaries
@@ -71,6 +100,9 @@ module objects {
 
             this.position.x = this.x;
             this.position.y = this.y;
+
+            this.CurrentLives = 5;
+            this.visible = false;
         }
 
         /**
@@ -83,7 +115,12 @@ module objects {
          */
         public update(): void {
             // player to follow mouse
-            this.position = new Vector2(this.x, this.y);
+           
+        }
+
+        public updateState(currentLives:number){
+            this.CurrentLives =  currentLives;
+             this.position = new Vector2(this.x, this.y);
 
             // if (objects.Player.isActivate) {
             //     this.y = core.stage.mouseY;
@@ -92,6 +129,7 @@ module objects {
             this.y = core.stage.mouseY;
             this.x = core.stage.mouseX;
             this._checkBounds();
+
         }
     }
 }

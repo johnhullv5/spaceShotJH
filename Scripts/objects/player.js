@@ -14,9 +14,6 @@ var objects;
      */
     var Player = (function (_super) {
         __extends(Player, _super);
-        // PRIVATE INSTANCE VARIABLES ++++++++++++++++++++++++++++
-        //static isActivate: boolean = false;
-        // PUBLIC PROPERTIES +++++++++++++++++++++++++++++++++++++++
         // CONSTRUCTORS +++++++++++++++++++++++++++++++++++++++++++
         /**
          * Creates an instance of Island.
@@ -26,6 +23,10 @@ var objects;
          */
         function Player(imageString) {
             _super.call(this, imageString);
+            // PRIVATE INSTANCE VARIABLES ++++++++++++++++++++++++++++
+            //static isActivate: boolean = false;
+            // PUBLIC PROPERTIES +++++++++++++++++++++++++++++++++++++++
+            this.numOfArmors = 3;
             this.start();
         }
         /**
