@@ -18,6 +18,14 @@ var managers;
                         createjs.Sound.play("enemy1_sound");
                         core.lives -= 1;
                     }
+                    if (other.name === "enemy2") {
+                        createjs.Sound.play("enemy1_sound");
+                        core.lives -= 1;
+                    }
+                    if (other.name === "enemy2_bullet") {
+                        createjs.Sound.play("enemy1_sound");
+                        core.lives -= 1;
+                    }
                     // if prime collides with diamond
                     if (other.name === "diamond") {
                         createjs.Sound.play("diamond_sound");

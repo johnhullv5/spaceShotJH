@@ -13,6 +13,7 @@ var scenes;
          */
         function Level2() {
             _super.call(this);
+            this._frameCount = 0;
         }
         Level2.prototype._updateScoreBoard = function () {
             this._livesLabel.text = "Lives: " + core.lives;
@@ -59,7 +60,7 @@ var scenes;
             //TEST ENDS
             // // enemy2 array
             this._enemy2 = new Array();
-            for (var count = 0; count < 1; count++) {
+            for (var count = 0; count < 5; count++) {
                 this._enemy2.push(new objects.Enemy2("enemy2"));
                 this.addChild(this._enemy2[count]);
             }
@@ -78,6 +79,7 @@ var scenes;
         };
         Level2.prototype.Update = function () {
             var _this = this;
+            this._frameCount++;
             this._space.update();
             this._player.update();
             this._diamond.forEach(function (diamond) {
@@ -103,12 +105,29 @@ var scenes;
                     _this._collision.check(enemy2, bullet);
                 });
             });
-            if (this._keyboardControls.fire) {
-                this._bullets[0].Fire(this._player.position);
+            //check if sapcebar is pushed .
+            if (this._frameCount % 5 == 0 && this._keyboardControls.fire) {
+                for (var bullet in this._bullets) {
+                    if (!this._bullets[bullet].InFlight) {
+                        this._bullets[bullet].Fire(this._player.position);
+                        break;
+                    }
+                }
+            }
+            //this._bullets[0].Fire(this._player.position);
+            if (this._frameCount % 57 == 0) {
                 this._enemy2.forEach(function (enemy2) {
-                    _this._enemyBullets[0].Fire(enemy2.position);
+                    for (var bullet = 0; bullet < _this._enemyBullets.length; bullet++) {
+                        if (!_this._enemyBullets[bullet].InFlight) {
+                            _this._enemyBullets[bullet].Fire(enemy2.position);
+                            break;
+                        }
+                    }
                 });
             }
+            this._enemyBullets.forEach(function (bullet) {
+                _this._collision.check(_this._player, bullet);
+            });
             this._updateScoreBoard();
             if (core.lives < 1) {
                 this._level2_bgsound.stop();

@@ -14,6 +14,8 @@ module scenes {
         private _enemyBullets: objects.enemy2_bullet[];
         private _keyboardControls: objects.KeyboardControls;
 
+        private _frameCount = 0;
+
         /**
          * Creates an instance of Menu.
          * 
@@ -79,7 +81,7 @@ module scenes {
 
             // // enemy2 array
             this._enemy2 = new Array<objects.Enemy2>();
-            for (let count = 0; count < 1; count++) {
+            for (let count = 0; count < 5; count++) {
                 this._enemy2.push(new objects.Enemy2("enemy2"));
                 this.addChild(this._enemy2[count]);
             }
@@ -105,6 +107,7 @@ module scenes {
         }
 
         public Update(): void {
+            this._frameCount++;
             this._space.update();
             this._player.update();
 
@@ -138,12 +141,32 @@ module scenes {
                 })
             });
 
-            if (this._keyboardControls.fire) {
-                this._bullets[0].Fire(this._player.position);
+            //check if sapcebar is pushed .
+            if (this._frameCount % 5 == 0 && this._keyboardControls.fire) {
+                for (var bullet in this._bullets) {
+                    if (!this._bullets[bullet].InFlight) {
+                        this._bullets[bullet].Fire(this._player.position);
+                        break;
+                    }
+                }
+
+            }
+
+            //this._bullets[0].Fire(this._player.position);
+            if (this._frameCount % 57 == 0) {
                 this._enemy2.forEach(enemy2 => {
-                    this._enemyBullets[0].Fire(enemy2.position);
+                    for (var bullet = 0; bullet < this._enemyBullets.length; bullet++) {
+                        if (!this._enemyBullets[bullet].InFlight) {
+                            this._enemyBullets[bullet].Fire(enemy2.position);
+                            break;
+                        }
+                    }
                 })
             }
+
+            this._enemyBullets.forEach(bullet => {
+                this._collision.check(this._player, bullet);
+            });
 
             this._updateScoreBoard();
 
