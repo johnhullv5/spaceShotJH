@@ -10,6 +10,7 @@
 /// <reference path="../objects/space.ts"/>
 /// <reference path="../objects/diamond.ts"/>
 /// <reference path="../objects/player.ts"/>
+/// <reference path="../objects/friend.ts"/>
 /// <reference path="../objects/shield_m.ts"/>
 /// <reference path="../objects/enemy1.ts"/>
 /// <reference path="../objects/enemy2.ts"/>

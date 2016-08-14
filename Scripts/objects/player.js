@@ -83,8 +83,8 @@ var objects;
                 this.x = (0 + (this.width * 0.5));
             }
             // check tob bounds
-            if (this.y <= (0 - (this.height * 0.5))) {
-                this.y = (0 - (this.height * 0.5));
+            if (this.y <= (100 - (this.height * 0.5))) {
+                this.y = (100 - (this.height * 0.5));
             }
             // check bottm bounds
             if (this.y >= (628 - (this.height * 0.5))) {

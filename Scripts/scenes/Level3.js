@@ -32,6 +32,8 @@ var scenes;
             // player object
             this._player = new objects.Player("player");
             this.addChild(this._player);
+            this._friend = new objects.Friend("friend");
+            this.addChild(this._friend);
             this._sheild = new objects.Shield("shield_m");
             this.addChild(this._sheild);
             // diamond array
@@ -80,6 +82,7 @@ var scenes;
             this._frameCount++;
             this._space.update();
             this._player.update();
+            this._friend.update();
             this._sheild.updateState(core.lives);
             this._diamond.forEach(function (diamond) {
                 diamond.update();

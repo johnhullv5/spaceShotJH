@@ -4,6 +4,7 @@ module scenes {
         private _space: objects.Space;
         private _diamond: objects.Diamond[];
         private _player: objects.Player;
+        private _friend: objects.Friend;
         private _sheild: objects.Shield;
         private _enemy3: objects.Enemy3[];
         private _explosions: objects.Explosion[];
@@ -49,6 +50,9 @@ module scenes {
             // player object
             this._player = new objects.Player("player");
             this.addChild(this._player);
+
+            this._friend = new objects.Friend("friend");
+            this.addChild(this._friend);
 
             this._sheild = new objects.Shield("shield_m");
             this.addChild(this._sheild);
@@ -117,6 +121,7 @@ module scenes {
             this._frameCount++;
             this._space.update();
             this._player.update();
+            this._friend.update();
             this._sheild.updateState(core.lives);
 
             this._diamond.forEach(diamond => {
@@ -163,8 +168,7 @@ module scenes {
             }
 
             if (this._frameCount % 10 == 0 && this._keyboardControls.armor) {
-                if(this._player.numOfArmors>0)
-                {
+                if (this._player.numOfArmors > 0) {
                     this._sheild.visible = true;
                     this._player.armorOn();
                 }
@@ -200,8 +204,7 @@ module scenes {
 
             this._updateScoreBoard();
 
-            if(this._player._sheildDamage)
-            {
+            if (this._player._sheildDamage) {
                 this._sheild.visible = false;
                 this._player._sheildDamage = false;
 
