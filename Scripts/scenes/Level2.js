@@ -47,6 +47,11 @@ var scenes;
                 this._bullets.push(new objects.player_bullet("player_bullet"));
                 this.addChild(this._bullets[bullet]);
             }
+            this._enemyBullets = new Array();
+            for (var bullet = 0; bullet < 10; bullet++) {
+                this._enemyBullets.push(new objects.enemy2_bullet("enemy2_bullet"));
+                this.addChild(this._enemyBullets[bullet]);
+            }
             //TEST TEST
             //this._bullets[0].Fire(this._player.position);
             // this._bullets[0].Fire(this._player.position);
@@ -83,6 +88,10 @@ var scenes;
                 //update each bullet
                 bullet.update();
             });
+            this._enemyBullets.forEach(function (bullet) {
+                //update each bullet
+                bullet.update();
+            });
             //update each enemy2
             this._enemy2.forEach(function (enemy2) {
                 enemy2.update();
@@ -96,6 +105,9 @@ var scenes;
             });
             if (this._keyboardControls.fire) {
                 this._bullets[0].Fire(this._player.position);
+                this._enemy2.forEach(function (enemy2) {
+                    _this._enemyBullets[0].Fire(enemy2.position);
+                });
             }
             this._updateScoreBoard();
             if (core.lives < 1) {

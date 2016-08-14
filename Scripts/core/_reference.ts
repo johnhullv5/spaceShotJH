@@ -14,6 +14,7 @@
 /// <reference path="../objects/enemy2.ts"/>
 /// <reference path="../objects/enemy3.ts"/>
 /// <reference path="../objects/player_bullet.ts"/>
+/// <reference path="../objects/enemy2_bullet.ts"/>
 /// <reference path="../managers/collision.ts"/>
 /// <reference path="../scenes/over.ts"/>
 /// <reference path="../scenes/level1.ts"/>

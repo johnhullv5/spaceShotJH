@@ -11,7 +11,8 @@ module scenes {
         private _level2Label: objects.Label;
         private _level2_bgsound: createjs.AbstractSoundInstance;
         private _bullets: objects.player_bullet[];
-        private _keyboardControls:objects.KeyboardControls;
+        private _enemyBullets: objects.enemy2_bullet[];
+        private _keyboardControls: objects.KeyboardControls;
 
         /**
          * Creates an instance of Menu.
@@ -59,6 +60,14 @@ module scenes {
             for (let bullet = 0; bullet < 10; bullet++) {
                 this._bullets.push(new objects.player_bullet("player_bullet"));
                 this.addChild(this._bullets[bullet]);
+
+
+            }
+
+            this._enemyBullets = new Array<objects.enemy2_bullet>();
+            for (let bullet = 0; bullet < 10; bullet++) {
+                this._enemyBullets.push(new objects.enemy2_bullet("enemy2_bullet"));
+                this.addChild(this._enemyBullets[bullet]);
 
 
             }
@@ -110,21 +119,30 @@ module scenes {
 
             });
 
+            this._enemyBullets.forEach(bullet => {
+                //update each bullet
+                bullet.update();
+
+            });
+
             //update each enemy2
             this._enemy2.forEach(enemy2 => {
                 enemy2.update();
                 this._collision.check(this._player, enemy2);
             });
 
-             //checks collisions between each enemy1 and each bullet
+            //checks collisions between each enemy1 and each bullet
             this._enemy2.forEach(enemy2 => {
                 this._bullets.forEach(bullet => {
                     this._collision.check(enemy2, bullet);
                 })
             });
 
-            if(this._keyboardControls.fire){
+            if (this._keyboardControls.fire) {
                 this._bullets[0].Fire(this._player.position);
+                this._enemy2.forEach(enemy2 => {
+                    this._enemyBullets[0].Fire(enemy2.position);
+                })
             }
 
             this._updateScoreBoard();

@@ -133,7 +133,7 @@ namespace core {
                 "player_bullet": { "frames": [4] },
                 "diamond": { "frames": [5] },
                 "ruleButton": { "frames": [6] },
-                "enemy_bullet": { "frames": [7] },
+                "enemy2_bullet": { "frames": [7] },
                 "player": { "frames": [8] },
                 "startButton": { "frames": [9] }
                 /*"plane":{
