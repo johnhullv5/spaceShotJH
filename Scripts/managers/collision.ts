@@ -13,7 +13,7 @@ module managers {
 
         }
 
-        public check(prime: objects.GameObject, other: objects.GameObject) {
+        public check(prime: objects.GameObject, other: objects.GameObject,newFrameRate:number=0) {
             //check to see if object is colliding
             if (objects.Vector2.distance(prime.position, other.position) < (prime.halfHeight + other.halfHeight)) {
                 if (!other.isColliding) {
@@ -63,7 +63,8 @@ module managers {
 
                     if (other.name === "player_bullet_update") {
                         createjs.Sound.play("diamond_sound");
-                        prime.Reset();
+                        prime.destroy();
+                        //prime.ResetFrameRate(newFrameRate);
                         other.Reset();
                         core.score += 999;
 

@@ -122,6 +122,13 @@ var objects;
         };
         GameObject.prototype.Reset = function () {
         };
+        GameObject.prototype.isDestroyed = function () {
+            return false;
+        };
+        GameObject.prototype.destroy = function () {
+        };
+        GameObject.prototype.ResetFrameRate = function (newFrameRate) {
+        };
         return GameObject;
     }(createjs.Sprite));
     objects.GameObject = GameObject;

@@ -119,5 +119,18 @@ module objects {
             
         }
 
+        public isDestroyed():boolean{
+            return false;
+        }
+
+        public destroy():void{
+        }
+
+        public ResetFrameRate(newFrameRate:number)
+        {
+        }
+        
+        
+
     }
 }

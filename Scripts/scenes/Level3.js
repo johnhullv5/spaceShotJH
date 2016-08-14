@@ -32,6 +32,8 @@ var scenes;
             // player object
             this._player = new objects.Player("player");
             this.addChild(this._player);
+            this._sheild = new objects.Shield("shield_m");
+            this.addChild(this._sheild);
             // diamond array
             this._diamond = new Array();
             for (var count = 0; count < 2; count++) {
@@ -40,9 +42,13 @@ var scenes;
             }
             // // enemy3 array
             this._enemy3 = new Array();
-            for (var count = 0; count < 1; count++) {
+            this._explosions = new Array();
+            for (var count = 0; count < 3; count++) {
                 this._enemy3.push(new objects.Enemy3("enemy3"));
+                this._explosions.push(new objects.Explosion("explosion"));
+                this._enemy3[count].setExplosion(this._explosions[count]);
                 this.addChild(this._enemy3[count]);
+                this.addChild(this._explosions[count]);
             }
             //bullet array
             this._bullets = new Array();
@@ -74,14 +80,15 @@ var scenes;
             this._frameCount++;
             this._space.update();
             this._player.update();
+            this._sheild.update();
             this._diamond.forEach(function (diamond) {
                 diamond.update();
                 _this._collision.check(_this._player, diamond);
             });
             //update each enemy3
             this._enemy3.forEach(function (enemy3) {
-                enemy3.update();
-                _this._collision.check(_this._player, enemy3);
+                enemy3.updateFrameRate(_this._frameCount);
+                _this._collision.check(_this._player, enemy3, _this._frameCount);
             });
             this._bullets.forEach(function (bullet) {
                 //update each bullet
@@ -97,11 +104,6 @@ var scenes;
             //     this._collision.check(this._player, enemy3);
             //  });
             //checks collisions between each enemy1 and each bullet
-            this._enemy3.forEach(function (enemy3) {
-                _this._bullets.forEach(function (bullet) {
-                    _this._collision.check(enemy3, bullet);
-                });
-            });
             //check if sapcebar is pushed .
             if (this._frameCount % 10 == 0 && this._keyboardControls.fire) {
                 for (var bullet in this._bullets) {
@@ -112,16 +114,23 @@ var scenes;
                 }
             }
             //this._bullets[0].Fire(this._player.position);
-            if (this._frameCount % 57 == 0) {
+            if (this._frameCount % 200 == 0) {
                 this._enemy3.forEach(function (enemy3) {
                     for (var bullet = 0; bullet < _this._enemyBullets.length; bullet++) {
                         if (!_this._enemyBullets[bullet].InFlight) {
-                            _this._enemyBullets[bullet].Fire(enemy3.position);
-                            break;
+                            if (enemy3.isVisible) {
+                                _this._enemyBullets[bullet].Fire(enemy3.position);
+                                break;
+                            }
                         }
                     }
                 });
             }
+            this._enemy3.forEach(function (enemy3) {
+                _this._bullets.forEach(function (bullet) {
+                    _this._collision.check(enemy3, bullet, _this._frameCount);
+                });
+            });
             this._enemyBullets.forEach(function (bullet) {
                 _this._collision.check(_this._player, bullet);
             });

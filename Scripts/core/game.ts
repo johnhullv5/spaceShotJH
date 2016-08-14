@@ -198,7 +198,11 @@ namespace core {
                 "startButton": { "frames": [18] },
                 "friend_bullet": { "frames": [19] },
                 "player_bullet": { "frames": [20] },
-                "enemy2_bullet": { "frames": [21] }
+                "enemy2_bullet": { "frames": [21] },
+                "explosion": {
+                    "frames": [10, 7, 1],
+	                "speed": 0.1
+                }
             }
 
         }

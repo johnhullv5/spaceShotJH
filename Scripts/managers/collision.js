@@ -8,7 +8,8 @@ var managers;
         };
         Collision.prototype.update = function () {
         };
-        Collision.prototype.check = function (prime, other) {
+        Collision.prototype.check = function (prime, other, newFrameRate) {
+            if (newFrameRate === void 0) { newFrameRate = 0; }
             //check to see if object is colliding
             if (objects.Vector2.distance(prime.position, other.position) < (prime.halfHeight + other.halfHeight)) {
                 if (!other.isColliding) {
@@ -49,7 +50,8 @@ var managers;
                     }
                     if (other.name === "player_bullet_update") {
                         createjs.Sound.play("diamond_sound");
-                        prime.Reset();
+                        prime.destroy();
+                        //prime.ResetFrameRate(newFrameRate);
                         other.Reset();
                         core.score += 999;
                     }
