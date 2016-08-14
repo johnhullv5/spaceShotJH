@@ -60,6 +60,13 @@ var managers;
                         other.Reset();
                         core.score += 999;
                     }
+                    if (other.name === "friend_bullet") {
+                        createjs.Sound.play("diamond_sound");
+                        prime.destroy();
+                        //prime.ResetFrameRate(newFrameRate);
+                        other.Reset();
+                        core.score += 999;
+                    }
                 }
             }
             else {

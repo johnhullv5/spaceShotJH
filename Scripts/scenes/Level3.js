@@ -54,9 +54,12 @@ var scenes;
             }
             //bullet array
             this._bullets = new Array();
+            this._friendBullets = new Array();
             for (var bullet = 0; bullet < 10; bullet++) {
                 this._bullets.push(new objects.player_bullet("player_bullet_update"));
                 this.addChild(this._bullets[bullet]);
+                this._friendBullets.push(new objects.Friend_bullet("friend_bullet"));
+                this.addChild(this._friendBullets[bullet]);
             }
             //bullet array
             this._enemyBullets = new Array();
@@ -97,6 +100,10 @@ var scenes;
                 //update each bullet
                 bullet.update();
             });
+            this._friendBullets.forEach(function (bullet) {
+                //update each bullet
+                bullet.update();
+            });
             this._enemyBullets.forEach(function (bullet) {
                 //update each bullet
                 bullet.update();
@@ -113,6 +120,14 @@ var scenes;
                     if (!this._bullets[bullet].InFlight) {
                         this._bullets[bullet].Fire(this._player.position);
                         break;
+                    }
+                }
+                if (this._friend.isVisible()) {
+                    for (var bullet in this._friendBullets) {
+                        if (!this._friendBullets[bullet].InFlight) {
+                            this._friendBullets[bullet].Fire(this._friend.position);
+                            break;
+                        }
                     }
                 }
             }

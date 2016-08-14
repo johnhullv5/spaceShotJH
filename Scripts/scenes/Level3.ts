@@ -16,6 +16,7 @@ module scenes {
 
         //level3
         private _bullets: objects.player_bullet_update[];
+        private _friendBullets: objects.Friend_bullet[];
         private _enemyBullets: objects.enemy3_bullet[];
         private _keyboardControls: objects.KeyboardControls;
 
@@ -81,9 +82,12 @@ module scenes {
 
             //bullet array
             this._bullets = new Array<objects.player_bullet_update>();
+            this._friendBullets = new Array<objects.Friend_bullet>();
             for (let bullet = 0; bullet < 10; bullet++) {
                 this._bullets.push(new objects.player_bullet("player_bullet_update"));
                 this.addChild(this._bullets[bullet]);
+                this._friendBullets.push(new objects.Friend_bullet("friend_bullet"));
+                this.addChild(this._friendBullets[bullet]);
 
 
             }
@@ -141,6 +145,12 @@ module scenes {
 
             });
 
+            this._friendBullets.forEach(bullet => {
+                //update each bullet
+                bullet.update();
+
+            });
+
             this._enemyBullets.forEach(bullet => {
                 //update each bullet
                 bullet.update();
@@ -164,6 +174,15 @@ module scenes {
                         break;
                     }
                 }
+                if (this._friend.isVisible()) {
+                    for (var bullet in this._friendBullets) {
+                        if (!this._friendBullets[bullet].InFlight) {
+                            this._friendBullets[bullet].Fire(this._friend.position);
+                            break;
+                        }
+                    }
+
+                }
 
             }
 
@@ -179,7 +198,7 @@ module scenes {
             if (this._frameCount % 10 == 0 && this._keyboardControls.friend) {
                 if (this._player.numOffriend > 0) {
                     this._friend.visible = true;
-                    this._player.numOffriend-=1;
+                    this._player.numOffriend -= 1;
                 }
 
             }
@@ -208,9 +227,8 @@ module scenes {
 
             this._enemyBullets.forEach(bullet => {
                 this._collision.check(this._player, bullet);
-                if(this._friend.visible)
-                {
-                     this._collision.check(this._friend, bullet);
+                if (this._friend.visible) {
+                    this._collision.check(this._friend, bullet);
                 }
             });
 

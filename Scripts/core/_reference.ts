@@ -18,6 +18,7 @@
 /// <reference path="../objects/explosion.ts"/>
 /// <reference path="../objects/player_bullet.ts"/>
 /// <reference path="../objects/player_bullet_update.ts"/>
+/// <reference path="../objects/friend_bullet.ts"/>
 /// <reference path="../objects/enemy2_bullet.ts"/>
 /// <reference path="../objects/enemy3_bullet.ts"/>
 /// <reference path="../managers/collision.ts"/>
