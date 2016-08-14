@@ -11,9 +11,10 @@ module objects {
         //static isActivate: boolean = false;
         // PUBLIC PROPERTIES +++++++++++++++++++++++++++++++++++++++
         public numOfArmors: number = 3;
+        public numOffriend: number = 3;
         private _isArmorOn: boolean = false;
         private _livesOfArmor: number = 2;
-        public _sheildDamage:boolean = false;
+        public _sheildDamage: boolean = false;
         // CONSTRUCTORS +++++++++++++++++++++++++++++++++++++++++++
         /**
          * Creates an instance of Island.
@@ -37,7 +38,7 @@ module objects {
 
         public armorOn(): void {
             this._isArmorOn = true;
-            
+
         }
 
         public getLivesOfArmor(): number {
@@ -49,25 +50,28 @@ module objects {
             }
         }
 
-        public damage():void{
-            this.damageArmor();
+        public damage(): boolean {
+           return  this.damageArmor();
 
         }
 
         public damageArmor(): boolean {
-            if (this._livesOfArmor > 0) {
-                this._livesOfArmor -= 1;
+            if (this._isArmorOn) {
+                if (this._livesOfArmor > 0) {
+                    this._livesOfArmor -= 1;
+                }
+                if (this._livesOfArmor === 0) {
+                    this.armorOff();
+                    this._sheildDamage = true;
+                    return true;
+                }
+                else {
+                    return false;
+                }
+
             }
-            if(this._livesOfArmor===0)
-            {
-                this.armorOff();
-                this._sheildDamage = true;
-                return true;
-            }
-            else{
-                return false;
-            }
-            
+
+
 
         }
 

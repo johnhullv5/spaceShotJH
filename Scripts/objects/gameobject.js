@@ -133,6 +133,7 @@ var objects;
             return false;
         };
         GameObject.prototype.damage = function () {
+            return false;
         };
         return GameObject;
     }(createjs.Sprite));

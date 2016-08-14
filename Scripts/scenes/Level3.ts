@@ -175,6 +175,15 @@ module scenes {
 
             }
 
+
+            if (this._frameCount % 10 == 0 && this._keyboardControls.friend) {
+                if (this._player.numOffriend > 0) {
+                    this._friend.visible = true;
+                    this._player.numOffriend-=1;
+                }
+
+            }
+
             //this._bullets[0].Fire(this._player.position);
             if (this._frameCount % 200 == 0) {
                 this._enemy3.forEach(enemy3 => {
@@ -199,6 +208,10 @@ module scenes {
 
             this._enemyBullets.forEach(bullet => {
                 this._collision.check(this._player, bullet);
+                if(this._friend.visible)
+                {
+                     this._collision.check(this._friend, bullet);
+                }
             });
 
 

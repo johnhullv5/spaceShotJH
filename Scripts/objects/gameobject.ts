@@ -134,8 +134,9 @@ module objects {
             return false;
         }
 
-        public damage():void{
-            
+        public damage():boolean{
+            return false;
+
         }
         
         

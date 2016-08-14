@@ -30,6 +30,7 @@ var objects;
             this._isArmorOn = false;
             this._livesOfArmor = 2;
             this._sheildDamage = false;
+            this._numberOflives = 3;
             this.start();
         }
         Friend.prototype.getValidity = function () {
@@ -50,19 +51,31 @@ var objects;
             }
         };
         Friend.prototype.damage = function () {
-            this.damageArmor();
+            var damageFlag = this.damageArmor();
+            if (damageFlag) {
+                this._numberOflives -= 1;
+                if (this._numberOflives === 0) {
+                    this.visible = false;
+                }
+            }
+            return true;
         };
         Friend.prototype.damageArmor = function () {
-            if (this._livesOfArmor > 0) {
-                this._livesOfArmor -= 1;
-            }
-            if (this._livesOfArmor === 0) {
-                this.armorOff();
-                this._sheildDamage = true;
-                return true;
+            if (this._isArmorOn) {
+                if (this._livesOfArmor > 0) {
+                    this._livesOfArmor -= 1;
+                }
+                if (this._livesOfArmor === 0) {
+                    this.armorOff();
+                    this._sheildDamage = true;
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
             else {
-                return false;
+                return true;
             }
         };
         /**
@@ -105,6 +118,7 @@ var objects;
             this.y = 380;
             this.position.x = this.x;
             this.position.y = this.y;
+            this.visible = false;
         };
         /**
          * This method updates the object's properties

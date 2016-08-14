@@ -13,7 +13,8 @@ module objects {
         public numOfArmors: number = 3;
         private _isArmorOn: boolean = false;
         private _livesOfArmor: number = 2;
-        public _sheildDamage:boolean = false;
+        public _sheildDamage: boolean = false;
+        public _numberOflives: number = 3;
         // CONSTRUCTORS +++++++++++++++++++++++++++++++++++++++++++
         /**
          * Creates an instance of Island.
@@ -37,7 +38,7 @@ module objects {
 
         public armorOn(): void {
             this._isArmorOn = true;
-            
+
         }
 
         public getLivesOfArmor(): number {
@@ -49,25 +50,38 @@ module objects {
             }
         }
 
-        public damage():void{
-            this.damageArmor();
+        public damage(): boolean {
+            var damageFlag = this.damageArmor();
+            if (damageFlag) {
+                this._numberOflives -= 1;
+                if (this._numberOflives === 0) {
+                    this.visible = false;
+                }
+            }
+            return true;
 
         }
 
         public damageArmor(): boolean {
-            if (this._livesOfArmor > 0) {
-                this._livesOfArmor -= 1;
-            }
-            if(this._livesOfArmor===0)
-            {
-                this.armorOff();
-                this._sheildDamage = true;
-                return true;
+            if (this._isArmorOn) {
+                if (this._livesOfArmor > 0) {
+                    this._livesOfArmor -= 1;
+                }
+                if (this._livesOfArmor === 0) {
+                    this.armorOff();
+                    this._sheildDamage = true;
+                    return true;
+                }
+                else {
+                    return false;
+                }
+
             }
             else{
-                return false;
+                return true;
             }
-            
+
+
 
         }
 
@@ -96,7 +110,7 @@ module objects {
 
             // check tob bounds
             if (this.y <= (50 - (this.height * 0.5))) {
-                this.y = (50- (this.height * 0.5));
+                this.y = (50 - (this.height * 0.5));
             }
 
             // check bottm bounds
@@ -122,6 +136,8 @@ module objects {
 
             this.position.x = this.x;
             this.position.y = this.y;
+
+            this.visible = false;
         }
 
         /**

@@ -27,6 +27,7 @@ var objects;
             //static isActivate: boolean = false;
             // PUBLIC PROPERTIES +++++++++++++++++++++++++++++++++++++++
             this.numOfArmors = 3;
+            this.numOffriend = 3;
             this._isArmorOn = false;
             this._livesOfArmor = 2;
             this._sheildDamage = false;
@@ -50,19 +51,21 @@ var objects;
             }
         };
         Player.prototype.damage = function () {
-            this.damageArmor();
+            return this.damageArmor();
         };
         Player.prototype.damageArmor = function () {
-            if (this._livesOfArmor > 0) {
-                this._livesOfArmor -= 1;
-            }
-            if (this._livesOfArmor === 0) {
-                this.armorOff();
-                this._sheildDamage = true;
-                return true;
-            }
-            else {
-                return false;
+            if (this._isArmorOn) {
+                if (this._livesOfArmor > 0) {
+                    this._livesOfArmor -= 1;
+                }
+                if (this._livesOfArmor === 0) {
+                    this.armorOff();
+                    this._sheildDamage = true;
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
         };
         /**

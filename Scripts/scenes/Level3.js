@@ -122,6 +122,12 @@ var scenes;
                     this._player.armorOn();
                 }
             }
+            if (this._frameCount % 10 == 0 && this._keyboardControls.friend) {
+                if (this._player.numOffriend > 0) {
+                    this._friend.visible = true;
+                    this._player.numOffriend -= 1;
+                }
+            }
             //this._bullets[0].Fire(this._player.position);
             if (this._frameCount % 200 == 0) {
                 this._enemy3.forEach(function (enemy3) {
@@ -142,6 +148,9 @@ var scenes;
             });
             this._enemyBullets.forEach(function (bullet) {
                 _this._collision.check(_this._player, bullet);
+                if (_this._friend.visible) {
+                    _this._collision.check(_this._friend, bullet);
+                }
             });
             this._updateScoreBoard();
             if (this._player._sheildDamage) {

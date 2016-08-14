@@ -5,7 +5,7 @@ module objects {
         // PUBLIC INSTANCE VARIABLES ++++++++++++
         public armor: boolean;
         public moveBackward: boolean;
-        public moveLeft: boolean;
+        public friend: boolean;
         public moveRight: boolean;
         public fire: boolean;
         public enabled: boolean;
@@ -27,7 +27,7 @@ module objects {
                     break;
                 case 37: /*left arrow*/
                 case 65: /* A Key */
-                    this.moveLeft = true;
+                    this.friend = true;
                     break;
                 case 40: /*down arrow*/
                 case 83: /* S Key */
@@ -54,7 +54,7 @@ module objects {
                     break;
                 case 37: /*left arrow*/
                 case 65: /* A Key */
-                    this.moveLeft = false;
+                    this.friend = false;
                     break;
                 case 40: /*down arrow*/
                 case 83: /* S Key */

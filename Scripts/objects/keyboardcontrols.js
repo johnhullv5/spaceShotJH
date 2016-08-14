@@ -17,7 +17,7 @@ var objects;
                     break;
                 case 37: /*left arrow*/
                 case 65:
-                    this.moveLeft = true;
+                    this.friend = true;
                     break;
                 case 40: /*down arrow*/
                 case 83:
@@ -43,7 +43,7 @@ var objects;
                     break;
                 case 37: /*left arrow*/
                 case 65:
-                    this.moveLeft = false;
+                    this.friend = false;
                     break;
                 case 40: /*down arrow*/
                 case 83:
