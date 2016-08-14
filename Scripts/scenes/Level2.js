@@ -106,7 +106,7 @@ var scenes;
                 });
             });
             //check if sapcebar is pushed .
-            if (this._frameCount % 5 == 0 && this._keyboardControls.fire) {
+            if (this._frameCount % 10 == 0 && this._keyboardControls.fire) {
                 for (var bullet in this._bullets) {
                     if (!this._bullets[bullet].InFlight) {
                         this._bullets[bullet].Fire(this._player.position);

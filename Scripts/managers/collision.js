@@ -22,6 +22,10 @@ var managers;
                         createjs.Sound.play("enemy1_sound");
                         core.lives -= 1;
                     }
+                    if (other.name === "enemy3") {
+                        createjs.Sound.play("enemy1_sound");
+                        core.lives -= 1;
+                    }
                     if (other.name === "enemy2_bullet") {
                         createjs.Sound.play("enemy1_sound");
                         core.lives -= 1;
