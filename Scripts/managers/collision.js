@@ -32,8 +32,11 @@ var managers;
                         core.lives -= 1;
                     }
                     if (other.name === "enemy3_bullet") {
-                        createjs.Sound.play("enemy1_sound");
-                        core.lives -= 1;
+                        prime.damage();
+                        if (!prime.getValidity()) {
+                            createjs.Sound.play("enemy1_sound");
+                            core.lives -= 1;
+                        }
                     }
                     // if prime collides with diamond
                     if (other.name === "diamond") {

@@ -27,8 +27,44 @@ var objects;
             //static isActivate: boolean = false;
             // PUBLIC PROPERTIES +++++++++++++++++++++++++++++++++++++++
             this.numOfArmors = 3;
+            this._isArmorOn = false;
+            this._livesOfArmor = 2;
+            this._sheildDamage = false;
             this.start();
         }
+        Player.prototype.getValidity = function () {
+            return this._isArmorOn;
+        };
+        Player.prototype.armorOff = function () {
+            this._isArmorOn = false;
+        };
+        Player.prototype.armorOn = function () {
+            this._isArmorOn = true;
+        };
+        Player.prototype.getLivesOfArmor = function () {
+            if (this.armorOn()) {
+                return this._livesOfArmor;
+            }
+            else {
+                return 0;
+            }
+        };
+        Player.prototype.damage = function () {
+            this.damageArmor();
+        };
+        Player.prototype.damageArmor = function () {
+            if (this._livesOfArmor > 0) {
+                this._livesOfArmor -= 1;
+            }
+            if (this._livesOfArmor === 0) {
+                this.armorOff();
+                this._sheildDamage = true;
+                return true;
+            }
+            else {
+                return false;
+            }
+        };
         /**
         * This method checks if the object has reached its boundaries
         *

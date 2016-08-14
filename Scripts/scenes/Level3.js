@@ -116,6 +116,7 @@ var scenes;
             if (this._frameCount % 10 == 0 && this._keyboardControls.armor) {
                 if (this._player.numOfArmors > 0) {
                     this._sheild.visible = true;
+                    this._player.armorOn();
                 }
             }
             //this._bullets[0].Fire(this._player.position);
@@ -140,7 +141,10 @@ var scenes;
                 _this._collision.check(_this._player, bullet);
             });
             this._updateScoreBoard();
-            this._sheild.decreaseArmors(core.lives, this._player);
+            if (this._player._sheildDamage) {
+                this._sheild.visible = false;
+                this._player._sheildDamage = false;
+            }
             if (core.lives < 1) {
                 this._level3_bgsound.stop();
                 core.scene = config.Scene.OVER;

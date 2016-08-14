@@ -166,6 +166,7 @@ module scenes {
                 if(this._player.numOfArmors>0)
                 {
                     this._sheild.visible = true;
+                    this._player.armorOn();
                 }
 
             }
@@ -199,7 +200,12 @@ module scenes {
 
             this._updateScoreBoard();
 
-            this._sheild.decreaseArmors(core.lives,this._player);
+            if(this._player._sheildDamage)
+            {
+                this._sheild.visible = false;
+                this._player._sheildDamage = false;
+
+            }
 
             if (core.lives < 1) {
                 this._level3_bgsound.stop();

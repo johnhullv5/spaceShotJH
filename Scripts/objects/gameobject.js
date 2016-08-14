@@ -129,6 +129,11 @@ var objects;
         };
         GameObject.prototype.ResetFrameRate = function (newFrameRate) {
         };
+        GameObject.prototype.getValidity = function () {
+            return false;
+        };
+        GameObject.prototype.damage = function () {
+        };
         return GameObject;
     }(createjs.Sprite));
     objects.GameObject = GameObject;

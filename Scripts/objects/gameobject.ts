@@ -129,6 +129,14 @@ module objects {
         public ResetFrameRate(newFrameRate:number)
         {
         }
+
+        public getValidity():boolean{
+            return false;
+        }
+
+        public damage():void{
+            
+        }
         
         
 

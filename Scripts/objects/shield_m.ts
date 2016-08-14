@@ -41,11 +41,12 @@ module objects {
         public decreaseArmors(newLives:number,player:objects.Player){
               var lives = this._currentLives;
               this.CurrentLives = newLives;
-               if(lives>this.CurrentLives){
+              if(player.damageArmor()){
                    player.numOfArmors-=1;
-                   this.visible = false;
+                    this.visible = false;
 
-               }
+              }
+              
                
         }
 

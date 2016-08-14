@@ -31,7 +31,7 @@ var objects;
         Shield.prototype.decreaseArmors = function (newLives, player) {
             var lives = this._currentLives;
             this.CurrentLives = newLives;
-            if (lives > this.CurrentLives) {
+            if (player.damageArmor()) {
                 player.numOfArmors -= 1;
                 this.visible = false;
             }
