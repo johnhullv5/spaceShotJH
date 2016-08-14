@@ -115,5 +115,9 @@ module objects {
 
         }
 
+        public Reset():void{
+            
+        }
+
     }
 }

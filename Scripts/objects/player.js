@@ -66,6 +66,8 @@ var objects;
         Player.prototype.start = function () {
             this.x = 50;
             this.y = 300;
+            this.position.x = this.x;
+            this.position.y = this.y;
         };
         /**
          * This method updates the object's properties

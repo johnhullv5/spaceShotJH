@@ -33,13 +33,13 @@ module objects {
          * @method _reset
          * @returns {void}
          */
-        private _reset():void {
+        public Reset():void {
             // this._dy = Math.floor((Math.random() * 5) + 5); // vertical speed
             // this._dx = Math.floor((Math.random() * 4) - 2); // horizontal drift
             this._dx = Math.floor((Math.random() * 5) + 8); // vertical drispeedft
-            console.log("dx:" + this._dx);
+            //console.log("dx:" + this._dx);
             this._dy = Math.floor((Math.random() * 4) + 2); // horizontal drift
-            console.log("dx:" + this._dy);
+           // console.log("dx:" + this._dy);
           
             this.x = 890;
             // get a random x location
@@ -58,7 +58,7 @@ module objects {
          */
         private _checkBounds():void {
             if(this.y >= (628 + (this.width * 0.5))) {
-                this._reset();
+                this.Reset();
             }
         }
         
@@ -73,7 +73,7 @@ module objects {
          * @returns {void}
          */
         public start():void {
-            this._reset();
+            this.Reset();
         }
 
         /**

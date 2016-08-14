@@ -41,6 +41,7 @@ var scenes;
             this.addChild(this._player);
             this.level1_bgsound = createjs.Sound.play("level1_bgsound");
             this.level1_bgsound.loop = -1;
+            //TEST  TEST  TEST  TEST 
             // enemy1 array
             this._enemy1 = new Array();
             for (var count = 0; count < 3; count++) {
@@ -63,7 +64,7 @@ var scenes;
             var _this = this;
             this._space.update();
             this._player.update();
-            // update each enemy1
+            // update each diamond
             this._diamond.forEach(function (diamond) {
                 diamond.update();
                 _this._collision.check(_this._player, diamond);
@@ -71,7 +72,10 @@ var scenes;
             // update each enemy1
             this._enemy1.forEach(function (enemy1) {
                 enemy1.update();
+                //this._collision.check(enemy1,bullet);
+                //checks collision nwith the player and each enmemy1
                 _this._collision.check(_this._player, enemy1);
+                // })
             });
             this._updateScoreBoard();
             if (core.lives < 1) {

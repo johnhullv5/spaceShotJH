@@ -68,6 +68,9 @@ module objects {
         public start(): void {
             this.x = 50;
             this.y = 300;
+
+            this.position.x = this.x;
+            this.position.y = this.y;
         }
 
         /**

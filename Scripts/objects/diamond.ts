@@ -70,7 +70,7 @@ module objects {
          */
         public start(): void {
             this._reset();
-          
+
         }
 
         /**

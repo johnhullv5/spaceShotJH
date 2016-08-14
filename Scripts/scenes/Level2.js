@@ -42,6 +42,16 @@ var scenes;
                 this._diamond.push(new objects.Diamond("diamond"));
                 this.addChild(this._diamond[count]);
             }
+            this._bullets = new Array();
+            for (var bullet = 0; bullet < 10; bullet++) {
+                this._bullets.push(new objects.player_bullet("player_bullet"));
+                this.addChild(this._bullets[bullet]);
+            }
+            //TEST TEST
+            this._bullets[0].Fire(this._player.position);
+            this._bullets[0].Fire(this._player.position);
+            console.log(this._player.position);
+            //TEST ENDS
             // // enemy2 array
             this._enemy2 = new Array();
             for (var count = 0; count < 1; count++) {
@@ -68,10 +78,20 @@ var scenes;
                 diamond.update();
                 _this._collision.check(_this._player, diamond);
             });
+            this._bullets.forEach(function (bullet) {
+                //update each bullet
+                bullet.update();
+            });
             //update each enemy2
             this._enemy2.forEach(function (enemy2) {
                 enemy2.update();
                 _this._collision.check(_this._player, enemy2);
+            });
+            //checks collisions between each enemy1 and each bullet
+            this._enemy2.forEach(function (enemy2) {
+                _this._bullets.forEach(function (bullet) {
+                    _this._collision.check(enemy2, bullet);
+                });
             });
             this._updateScoreBoard();
             if (core.lives < 1) {

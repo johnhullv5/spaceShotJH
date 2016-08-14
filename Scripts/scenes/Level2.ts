@@ -10,6 +10,7 @@ module scenes {
         private _livesLabel: objects.Label;
         private _level2Label: objects.Label;
         private _level2_bgsound: createjs.AbstractSoundInstance;
+        private _bullets: objects.player_bullet[];
 
         /**
          * Creates an instance of Menu.
@@ -19,14 +20,14 @@ module scenes {
             super();
         }
 
-        private _updateScoreBoard() {   
+        private _updateScoreBoard() {
             this._livesLabel.text = "Lives: " + core.lives;
             this._scoreLabel.text = "Score: " + core.score;
-           if(core.score >= core.toLevel3){
+            if (core.score >= core.toLevel3) {
                 this._level2_bgsound.stop();
                 core.scene = config.Scene.LEVEL3;
                 core.changeScene();
-            } 
+            }
         }
 
         /**
@@ -44,15 +45,28 @@ module scenes {
             // player object
             this._player = new objects.Player("player");
             this.addChild(this._player);
-           
 
-             // diamond array
+
+            // diamond array
             this._diamond = new Array<objects.Diamond>();
             for (let count = 0; count < 2; count++) {
                 this._diamond.push(new objects.Diamond("diamond"));
                 this.addChild(this._diamond[count]);
             }
-            
+
+            this._bullets = new Array<objects.player_bullet>();
+            for (let bullet = 0; bullet < 10; bullet++) {
+                this._bullets.push(new objects.player_bullet("player_bullet"));
+                this.addChild(this._bullets[bullet]);
+
+
+            }
+            //TEST TEST
+            this._bullets[0].Fire(this._player.position);
+             this._bullets[0].Fire(this._player.position);
+            console.log(this._player.position);
+            //TEST ENDS
+
             // // enemy2 array
             this._enemy2 = new Array<objects.Enemy2>();
             for (let count = 0; count < 1; count++) {
@@ -73,7 +87,7 @@ module scenes {
             this._scoreLabel = new objects.Label("Score: " + core.score, "40px", "Consolas", "#1AFBF4", 600, 5, false);
             this.addChild(this._scoreLabel);
 
-            
+
             // add this scene to the global scene container
             core.stage.addChild(this);
         }
@@ -81,16 +95,29 @@ module scenes {
         public Update(): void {
             this._space.update();
             this._player.update();
-           
-            this._diamond.forEach(diamond => {
-                 diamond.update();
-                 this._collision.check(this._player, diamond);
-             });
 
-             //update each enemy2
+            this._diamond.forEach(diamond => {
+                diamond.update();
+                this._collision.check(this._player, diamond);
+            });
+
+            this._bullets.forEach(bullet => {
+                //update each bullet
+                bullet.update();
+
+            });
+
+            //update each enemy2
             this._enemy2.forEach(enemy2 => {
                 enemy2.update();
                 this._collision.check(this._player, enemy2);
+            });
+
+             //checks collisions between each enemy1 and each bullet
+            this._enemy2.forEach(enemy2 => {
+                this._bullets.forEach(bullet => {
+                    this._collision.check(enemy2, bullet);
+                })
             });
 
             this._updateScoreBoard();
