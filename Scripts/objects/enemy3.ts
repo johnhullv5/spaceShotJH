@@ -56,7 +56,7 @@ module objects {
             this.y = 0;
             // get a random x location
             //this.x = Math.floor((Math.random() * (640 - (this.width * 0.5))) + (this.width * 0.5));
-            this._isDestroyed = false;
+            //this._isDestroyed = false;
 
             //this._explosion.Reset();
             // if(this._explosion.InFlight)
@@ -96,12 +96,14 @@ module objects {
             this.ResetFrameRate(0);
         }
 
-        public destroy(newFrameRate: number): void {
+        public destroied(newFrameRate: number): void {
+            
+            this.eventFrame = newFrameRate;
             this._isDestroyed = true;
             if (this._isDestroyed)
-            //if(this._isDestroyed)
+           
             {
-                console.log("fire!!!!!!");
+              
                 this.visible = false;
                 this._explosion.Fire(this.position, newFrameRate);
                 this._explosion.InFlight = true;

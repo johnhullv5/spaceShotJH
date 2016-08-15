@@ -72,10 +72,16 @@ module managers {
 
                     if (other.name === "player_bullet_update") {
                         createjs.Sound.play("diamond_sound");
-                        prime.destroy();
-                        //prime.ResetFrameRate(newFrameRate);
+
+                      if(prime.name==="enemy3"){
+
+                          prime.destroied(newFrameRate);
+
                         other.Reset();
                         core.score += 999;
+
+                      }
+                        
 
                     }
 

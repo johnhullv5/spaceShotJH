@@ -13,9 +13,18 @@ module objects {
         private _name:string;
         private _position:Vector2;
         private _isColliding:boolean;
+        private _eventFrame:number;
         public sound:createjs.AbstractSoundInstance;
 
         // PUBLIC PROPERTIES +++++++++++++++++++++++++++++++++++++++
+
+        get eventFrame():number{
+            return this._eventFrame;
+        }
+
+        set eventFrame(newEventFrame:number){
+            this._eventFrame = newEventFrame;
+        }
 
         get width():number {
             return this._width;
@@ -88,6 +97,7 @@ module objects {
             this.regY = this.halfHeight;
             this.position = new Vector2(this.x, this.y);
             this.isColliding = false;
+            this.eventFrame = 0;
         }
 
         /**
@@ -125,6 +135,11 @@ module objects {
 
         public destroy():void{
         }
+
+        public destroied(numFrameRate:number):void{
+            //console.log("********Parent class*************");
+        }
+
 
         public ResetFrameRate(newFrameRate:number)
         {

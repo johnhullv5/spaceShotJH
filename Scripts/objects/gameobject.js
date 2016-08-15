@@ -26,8 +26,18 @@ var objects;
             this._initialize(imageString);
             this.start();
         }
-        Object.defineProperty(GameObject.prototype, "width", {
+        Object.defineProperty(GameObject.prototype, "eventFrame", {
             // PUBLIC PROPERTIES +++++++++++++++++++++++++++++++++++++++
+            get: function () {
+                return this._eventFrame;
+            },
+            set: function (newEventFrame) {
+                this._eventFrame = newEventFrame;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GameObject.prototype, "width", {
             get: function () {
                 return this._width;
             },
@@ -99,6 +109,7 @@ var objects;
             this.regY = this.halfHeight;
             this.position = new objects.Vector2(this.x, this.y);
             this.isColliding = false;
+            this.eventFrame = 0;
         };
         /**
          * This method is used to initialize public properties
@@ -126,6 +137,9 @@ var objects;
             return false;
         };
         GameObject.prototype.destroy = function () {
+        };
+        GameObject.prototype.destroied = function (numFrameRate) {
+            //console.log("********Parent class*************");
         };
         GameObject.prototype.ResetFrameRate = function (newFrameRate) {
         };

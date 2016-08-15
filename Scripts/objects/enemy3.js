@@ -51,7 +51,7 @@ var objects;
             this.y = 0;
             // get a random x location
             //this.x = Math.floor((Math.random() * (640 - (this.width * 0.5))) + (this.width * 0.5));
-            this._isDestroyed = false;
+            //this._isDestroyed = false;
             //this._explosion.Reset();
             // if(this._explosion.InFlight)
             // {
@@ -84,12 +84,10 @@ var objects;
             this._isDestroyed = false;
             this.ResetFrameRate(0);
         };
-        Enemy3.prototype.destroy = function (newFrameRate) {
+        Enemy3.prototype.destroied = function (newFrameRate) {
+            this.eventFrame = newFrameRate;
             this._isDestroyed = true;
-            if (this._isDestroyed) 
-            //if(this._isDestroyed)
-            {
-                console.log("fire!!!!!!");
+            if (this._isDestroyed) {
                 this.visible = false;
                 this._explosion.Fire(this.position, newFrameRate);
                 this._explosion.InFlight = true;
